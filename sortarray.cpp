@@ -8,22 +8,25 @@ void swapElement ( int anArray[], int index1, int index2 );
 int findSmallestElement ( int anArray[], int starting_index, int size );
 void selectionSort ( int anArray[], int size );
 void printArray( int anArray[], int size );
+double median ( int dataSet[], int size );
 
 int main ()
 {
     srand ( time ( NULL ) );
 
-    int exampleArray[ 10 ];
-    for ( int i = 0; i < 10; i++ )
+    int exampleArray[ 17 ];
+    int sz = 10;
+    for ( int i = 0; i < sz; i++ )
     {
         exampleArray[ i ] = rand() % 50;
     }
     cout << "Array: ";
-    printArray ( exampleArray, 10 );
-    selectionSort ( exampleArray, 10 );
+    printArray ( exampleArray, sz );
+    cout << '\n';
+    selectionSort ( exampleArray, sz );
     cout << "Sorted array: ";
-    printArray ( exampleArray , 10 );
-    cout << endl;
+    printArray ( exampleArray , sz );
+    cout << endl << "Median: " << median( exampleArray, sz ) << '\n';
 }
 
 void swapElement ( int anArray[], int index1, int index2 )
@@ -58,7 +61,7 @@ void printArray ( int anArray[], int size )
             cout << ", ";
         }
     }
-    cout << ']' << endl;
+    cout << ']';
 }
 
 void selectionSort ( int theArray[], int length )
@@ -68,5 +71,21 @@ void selectionSort ( int theArray[], int length )
 
         swapElement ( theArray, i,
             findSmallestElement ( theArray, i, length ) );
+    }
+}
+
+double median ( int dataSet[], int size )
+{
+    if ( size % 2 != 0 )
+    {
+        return dataSet[ ( size / 2 ) + 1 ];
+    }
+    else
+    {
+        int i = size / 2;
+        int j = size / 2 - 1;
+        double avg1 = dataSet[ i ];
+        double avg2 = dataSet[ j ];
+        return ( avg1 + avg2 ) / 2;
     }
 }
